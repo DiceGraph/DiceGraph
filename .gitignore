@@ -352,3 +352,5 @@ MigrationBackup/
 .cache
 
 dist
+
+.DS_Store

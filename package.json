@@ -1,0 +1,27 @@
+{
+  "name": "dice-graph",
+  "version": "0.1.0",
+  "description": "easy to graph base on G6",
+  "main": "source/index.ts",
+  "repository": "https://github.com/DiceGraph/DiceGraph.git",
+  "author": "Dominic Ming",
+  "license": "MIT",
+  "scripts": {
+    "start:site": "parcel site/index.html",
+    "build:site": "rm -rf ./docs & parcel build site/index.html -d docs"
+  },
+  "dependencies": {
+    "@antv/g6": "^3.7.3",
+    "color": "^3.1.3"
+  },
+  "devDependencies": {
+    "classnames": "^2.2.6",
+    "less": "^3.12.2",
+    "parcel": "^1.12.4",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-logview": "^1.0.0",
+    "react-router-dom": "^5.2.0",
+    "typescript": "^4.0.5"
+  }
+}
