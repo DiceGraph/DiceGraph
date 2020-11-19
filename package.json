@@ -8,7 +8,7 @@
   "license": "MIT",
   "scripts": {
     "start:site": "parcel site/index.html",
-    "build:site": "rm -rf ./docs & parcel build site/index.html -d docs"
+    "build:site": "rm -rf ./docs & parcel build site/index.html -d docs --public-url ./"
   },
   "dependencies": {
     "@antv/g6": "^3.7.3",
