@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 
 export default (props) => {
   const history = useHistory();
-  return <div className="sample-card" style={{ flex: 1 }} onClick={() => { history.push(`/sample/${props.name}`) }}>
+  return <div className="sample-card" onClick={() => { history.push(`/sample/${props.name}`) }}>
     <div className="sample-img">
       <img height={200} src={props.img}/>
     </div>

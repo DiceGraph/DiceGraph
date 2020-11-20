@@ -18,7 +18,7 @@ export default (props) => {
         style={{
           display: "flex",
           width: 1200,
-          height: 600,
+          minHeight: 600,
           margin: "40px auto",
         }}
       >

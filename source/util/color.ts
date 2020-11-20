@@ -1,4 +1,4 @@
-import Color from 'color';
+import * as Color from 'color';
 
 export const generateStyleFromColor = (front, back = '#fff') => {
   const color = Color(front);
