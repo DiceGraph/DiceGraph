@@ -1,12 +1,16 @@
 import React from "react";
 import graph from "../graph";
 
+const flatGraph = Object.values(graph).reduce(
+  (a, b) => Object.assign(a, b), {}
+)
+
 export default (props) => {
   const { match } = props;
   const {
     params: { name },
   } = match;
-  const target = graph[name];
+  const target = flatGraph[name];
   const { src, title, description } = target;
 
   return (

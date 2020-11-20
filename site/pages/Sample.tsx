@@ -2,10 +2,14 @@ import React from "react";
 import { useGraph } from "../hooks";
 import graph from '../graph';
 
+const flatGraph = Object.values(graph).reduce(
+  (a, b) => Object.assign(a, b), {}
+)
+
 export default (props) => {
   const { match } = props;
   const { params: { name } } = match;
-  const target = graph[name];
+  const target = flatGraph[name];
   const { data, GraphClass, title, description, config = {}, structure, className } = target;
   const [el] = useGraph(GraphClass, data, config)
 
