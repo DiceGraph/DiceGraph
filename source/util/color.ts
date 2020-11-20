@@ -1,4 +1,10 @@
-import * as Color from 'color';
+import * as BaseColor from 'color';
+
+let Color = BaseColor;
+
+if (typeof Color !== 'function') {
+  Color = BaseColor.default
+}
 
 export const generateStyleFromColor = (front, back = '#fff') => {
   const color = Color(front);

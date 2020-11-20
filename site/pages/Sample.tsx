@@ -33,7 +33,7 @@ export default (props) => {
               `
 import { ${className} } from 'dice-graph';
 
-const instance = new ${className}();
+const instance = new ${className}({});
 
 // DOM node that your graph render
 const el = document.getElementById('target');

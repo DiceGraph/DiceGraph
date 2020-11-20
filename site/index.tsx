@@ -6,6 +6,7 @@ import { HashRouter, Route, Switch, Link } from "react-router-dom";
 import './index.less';
 import Samples from "./pages/Samples";
 import Sample from "./pages/Sample";
+import Iframe from "./pages/Iframe";
 
 const NavBar = props => {
   const { location: { pathname } } = props;
@@ -53,7 +54,8 @@ const App = () => (
       <div>
         <Switch>
           <Route path="/" exact component={Samples}/>
-          <Route path="/sample/:name" component={Sample} exact />
+          <Route path="/sample/render/:name" component={Sample} exact />
+          <Route path="/sample/iframe/:name" component={Iframe} exact />
         </Switch>
       </div>
     </div>

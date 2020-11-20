@@ -3,6 +3,7 @@ import { MindMapGraph } from '../../../source';
 import img from '../../assets/mindMap.jpg'
 
 export default {
+  type: 'render',
   data,
   GraphClass: MindMapGraph,
   className: 'MindMapGraph',

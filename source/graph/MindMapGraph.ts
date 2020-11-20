@@ -1,3 +1,4 @@
+import { GraphOptions } from "@antv/g6/es/types";
 import TreeGraph from "../base/TreeGraph";
 
 export type MindMapGraphNode = {
@@ -9,7 +10,7 @@ export type MindMapGraphNode = {
 }
 
 export default class MindMapGraph extends TreeGraph<MindMapGraphNode> {
-  constructor(userConfig) {
+  constructor(userConfig = {} as GraphOptions) {
     super({
       fitView: true,
       fitViewPadding: [10, 20],
@@ -34,7 +35,6 @@ export default class MindMapGraph extends TreeGraph<MindMapGraphNode> {
         type: 'cubic-horizontal',
         style: {
           lineWidth: 2,
-          stroke: userConfig.color || '#096dd9'
         }
       },
       modes: {
