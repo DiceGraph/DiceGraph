@@ -1,7 +1,8 @@
 # DiceGraph
-> Graph out of box
+> 👀 Use graph out of box.
+> ⚠️ Still in development, will change fast and add more GraphClass
 
-![Dice Graph](./site/assets/DiceGraph.png)
+<img src="./site/assets/DiceGraph.png" width="64px" height="64px" alt="Dice Graph"/>
 
 ### Quick Start
 
