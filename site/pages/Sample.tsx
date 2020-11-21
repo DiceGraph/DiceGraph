@@ -1,4 +1,5 @@
 import React from "react";
+import Helmet from "react-helmet";
 import { useGraph } from "../hooks";
 import graph from '../graph';
 
@@ -15,6 +16,9 @@ export default (props) => {
 
   return (
     <div>
+      <Helmet>
+        <title>DiceGraph - {title}</title>
+      </Helmet>
       <h4>{title}</h4>
       <p>{description}</p>
       <div

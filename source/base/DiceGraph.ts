@@ -1,5 +1,5 @@
 import G6, { Graph } from "@antv/g6/es";
-import { GraphOptions } from "@antv/g6/es/types";
+import { GraphData, GraphOptions } from "@antv/g6/es/types";
 import { generateStyleFromColor } from "../util/color";
 
 export default class DiceGraph<DataType = {}, ConfigType = {}> {
@@ -8,7 +8,7 @@ export default class DiceGraph<DataType = {}, ConfigType = {}> {
 
   protected G6Core = G6;
 
-  protected data: DataType;
+  protected data: DataType | GraphData;
 
   protected tree = false;
 
@@ -95,7 +95,6 @@ export default class DiceGraph<DataType = {}, ConfigType = {}> {
   public setData = (data: DataType) => {
     this.checkData(data);
     this.data = this.dataTransform(data);
-    console.log(this.dataTransform(data));
 
     if (this.graph) {
       this.graph.changeData(this.data);
@@ -115,7 +114,7 @@ export default class DiceGraph<DataType = {}, ConfigType = {}> {
     return true;
   };
 
-  public dataTransform(data: DataType): DataType {
+  public dataTransform(data: DataType): DataType | GraphData {
     return data;
   }
 

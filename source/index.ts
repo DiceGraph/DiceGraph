@@ -1,9 +1,10 @@
 import MindMapGraph from "./graph/MindMapGraph";
+import FamilyTreeGraph from "./graph/FamilyTreeGraph"
 
 export {
-  MindMapGraph
+  MindMapGraph, FamilyTreeGraph
 }
 
 export default {
-  MindMapGraph
+  MindMapGraph, FamilyTreeGraph
 }

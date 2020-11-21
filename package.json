@@ -1,6 +1,6 @@
 {
   "name": "dice-graph",
-  "version": "0.2.9",
+  "version": "0.3.0",
   "description": "easy to graph base on G6",
   "main": "lib/index.min.js",
   "typings": "types/index.d.ts",
@@ -23,6 +23,7 @@
     "parcel": "^1.12.4",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-helmet": "^6.1.0",
     "react-logview": "^1.0.0",
     "react-router-dom": "^5.2.0",
     "ts-loader": "^8.0.11",

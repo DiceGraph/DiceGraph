@@ -8,6 +8,8 @@ import Samples from "./pages/Samples";
 import Sample from "./pages/Sample";
 import Iframe from "./pages/Iframe";
 
+import logo from './assets/DiceGraph.png'
+
 const NavBar = props => {
   const { location: { pathname } } = props;
   const links = [{
@@ -42,7 +44,7 @@ const App = () => (
       }}
     >
       <div>
-        <div style={{ width: 30, height: 10, background: "#096dd9" }} />
+      <img width={36} height={36} src={logo} />
         <h1>Dice Graph</h1>
         <h4 style={{ color: "#777", fontWeight: 200 }}>
           To use graph with data out of box, for many scenes.

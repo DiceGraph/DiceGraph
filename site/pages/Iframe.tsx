@@ -1,9 +1,11 @@
 import React from "react";
+import Helmet from "react-helmet";
 import graph from "../graph";
 
 const flatGraph = Object.values(graph).reduce(
-  (a, b) => Object.assign(a, b), {}
-)
+  (a, b) => Object.assign(a, b),
+  {}
+);
 
 export default (props) => {
   const { match } = props;
@@ -15,6 +17,9 @@ export default (props) => {
 
   return (
     <div>
+      <Helmet>
+        <title>DiceGraph - {title}</title>
+      </Helmet>
       <h4>{title}</h4>
       <p>{description}</p>
       <div

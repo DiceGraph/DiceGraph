@@ -1,3 +1,4 @@
+import { GraphOptions } from "@antv/g6/es/types";
 import TreeGraph from "../base/TreeGraph";
 export declare type MindMapGraphNode = {
     direction?: 'left' | 'right';
@@ -7,7 +8,7 @@ export declare type MindMapGraphNode = {
     children?: MindMapGraphNode[];
 };
 export default class MindMapGraph extends TreeGraph<MindMapGraphNode> {
-    constructor(userConfig: any);
+    constructor(userConfig?: GraphOptions);
     dataTransform(data: any): any;
     protected registerCustomSetting(): void;
     afterRender(): void;

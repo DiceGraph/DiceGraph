@@ -1,10 +1,14 @@
 import React from "react";
+import Helmet from "react-helmet";
 import SampleCard from "../compoents/SampleCard";
 import graph from '../graph';
 
 export default () => {
   return (
     <div>
+      <Helmet>
+        <title>DiceGraph - Graph out of box</title>
+      </Helmet>
       {Object.entries(graph).map(([key, obj]) => (
         <>
         <h3>{key}</h3>

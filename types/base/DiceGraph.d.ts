@@ -1,5 +1,5 @@
 import { Graph } from "@antv/g6/es";
-import { GraphOptions } from "@antv/g6/es/types";
+import { GraphData, GraphOptions } from "@antv/g6/es/types";
 export default class DiceGraph<DataType = {}, ConfigType = {}> {
     protected graph: Graph | null;
     protected G6Core: {
@@ -50,7 +50,7 @@ export default class DiceGraph<DataType = {}, ConfigType = {}> {
             distance: (p1: import("_@antv_g-base@0.5.1@@antv/g-base").Point, p2: import("_@antv_g-base@0.5.1@@antv/g-base").Point) => number;
             scaleMatrix: (matrix: import("@antv/g6/es/types").Matrix[], ratio: number) => import("@antv/g6/es/types").Matrix[];
             floydWarshall: (adjMatrix: import("@antv/g6/es/types").Matrix[]) => import("@antv/g6/es/types").Matrix[];
-            getAdjMatrix: (data: import("@antv/g6/es/types").GraphData, directed: boolean) => import("@antv/g6/es/types").Matrix[];
+            getAdjMatrix: (data: GraphData, directed: boolean) => import("@antv/g6/es/types").Matrix[];
             translate: (group: import("_@antv_g-base@0.5.1@@antv/g-base").IGroup, vec: import("_@antv_g-base@0.5.1@@antv/g-base").Point) => void;
             move: (group: import("_@antv_g-base@0.5.1@@antv/g-base").IGroup, point: import("_@antv_g-base@0.5.1@@antv/g-base").Point) => void;
             scale: (group: import("_@antv_g-base@0.5.1@@antv/g-base").IGroup, ratio: number | number[]) => void;
@@ -404,7 +404,7 @@ export default class DiceGraph<DataType = {}, ConfigType = {}> {
             downTriangle: (x: any, y: any, r: any) => any[][];
         };
     };
-    protected data: DataType;
+    protected data: DataType | GraphData;
     protected tree: boolean;
     protected el: HTMLElement;
     protected config: GraphOptions;
@@ -420,7 +420,7 @@ export default class DiceGraph<DataType = {}, ConfigType = {}> {
     getData: () => DataType;
     protected registerCustomSetting(): void;
     protected checkData: (data: DataType) => boolean;
-    dataTransform(data: DataType): DataType;
+    dataTransform(data: DataType): DataType | GraphData;
     beforeRender(): void;
     afterRender(): void;
     render(): void;
