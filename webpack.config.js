@@ -1,8 +1,10 @@
 const path = require('path');
-
+const TerserPlugin = require("terser-webpack-plugin");
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin
 
 module.exports = exports = module.exports = {
   entry: './source/index.ts',
+  plugins: [new BundleAnalyzerPlugin({ analyzerPort: 8987 })],
   module: {
     rules: [
       {
@@ -21,5 +23,10 @@ module.exports = exports = module.exports = {
     libraryTarget: 'umd',
     libraryExport: 'default',
     path: path.resolve(process.cwd(), 'lib/'),
+  },
+  optimization: {
+    usedExports: true,
+    minimize: true,
+    minimizer: [new TerserPlugin()],
   },
 };

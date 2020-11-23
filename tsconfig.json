@@ -10,7 +10,7 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "declarationDir": "types",
-    "outDir": "dist/lib",
+    "outDir": "lib/js",
     "typeRoots": [
       "node_modules/@types"
     ],

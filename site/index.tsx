@@ -16,17 +16,15 @@ const NavBar = props => {
     to: '/',
     title: 'Samples' 
   }, {
-    to: '/start',
-    title: 'Quick Start' 
-  }, {
-    to: 'https://github.com/DiceGraph/DiceGraph',
-    title: 'github' 
+    href: 'https://github.com/DiceGraph/DiceGraph',
+    title: 'Github' 
   }]
 
   return <div style={{ width: '100%', display: 'flex', margin: '30px auto' }}>
     {
       links.map(e => <div key={e.to} className={classnames("nav-link", pathname === (e.to) && 'active')}>
-      <Link to={e.to}>{e.title}</Link>
+      {e.to && <Link to={e.to}>{e.title}</Link>}
+      {e.href && <a href={e.href} target="_blank">{e.title}</a>}
     </div>)
     }
 </div>

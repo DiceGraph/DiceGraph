@@ -1,10 +1,12 @@
-# DiceGraph
-> 👀 Use graph out of box.
-> ⚠️ Still in development, will change fast and add more GraphClass
-
 <img src="./site/assets/DiceGraph.png" width="64px" height="64px" alt="Dice Graph"/>
 
-### Quick Start
+# DiceGraph
+> 👀 Use graph out of box.
+> 
+> ⚠️ Still in development, will change fast and add more GraphClass
+
+
+## Quick Start
 
 ```bash
 npm install --save dice-graph
