@@ -1,6 +1,6 @@
 {
   "name": "dice-graph",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Graph out of box",
   "module": "esm/index.js",
   "main": "cjs/index.js",
@@ -20,7 +20,8 @@
   },
   "dependencies": {
     "@antv/g6": "^4.0.0",
-    "color": "^3.1.3"
+    "color": "^3.1.3",
+    "compression-webpack-plugin": "^6.1.1"
   },
   "devDependencies": {
     "@rollup/plugin-json": "^4.1.0",

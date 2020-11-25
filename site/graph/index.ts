@@ -1,13 +1,15 @@
-import Angular from "./Angular";
-import FamilyTree from "./FamilyTree";
-import Mindmap from "./Mindmap";
-import React from "./React";
-import Vue from "./Vue";
+import Angular from "./framework/Angular";
+import FamilyTree from "./class/FamilyTree";
+import Mindmap from "./class/Mindmap";
+import DecisionGraph from "./class/DecisionGraph";
+import React from "./framework/React";
+import Vue from "./framework/Vue";
 
 export default {
   Graph: {
     mindmap: Mindmap,
-    familytree: FamilyTree
+    familytree: FamilyTree,
+    decisiongraph: DecisionGraph
   },
   FrameWork: {
     react: React,

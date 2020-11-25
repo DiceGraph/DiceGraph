@@ -1,10 +1,11 @@
 const path = require('path');
 const TerserPlugin = require("terser-webpack-plugin");
+const CompressionPlugin = require("compression-webpack-plugin");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin
 
 module.exports = exports = module.exports = {
   entry: './source/index.ts',
-  plugins: [new BundleAnalyzerPlugin({ analyzerPort: 8987 })],
+  // plugins: [new BundleAnalyzerPlugin({ analyzerPort: 8987 })],
   module: {
     rules: [
       {

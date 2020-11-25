@@ -1,3 +1,4 @@
+import { TreeGraph as G6Tree } from '@antv/g6/es';
 import DiceGraph from "./DiceGraph";
 
 export default class TreeGraph<DataType> extends DiceGraph<DataType> {
@@ -18,7 +19,7 @@ export default class TreeGraph<DataType> extends DiceGraph<DataType> {
         height,
         ...this.config,
       }
-      return new this.G6Core.TreeGraph(mixConfig);
+      return new G6Tree(mixConfig);
     } else {
       console.warn(el, "mount element was not found");
       return null;

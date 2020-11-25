@@ -1,12 +1,10 @@
-import G6, { Graph } from "@antv/g6/es";
+import{ Graph } from "@antv/g6/es";
 import { GraphData, GraphOptions } from "@antv/g6/es/types";
 import { generateStyleFromColor } from "../util/color";
 
 export default class DiceGraph<DataType = {}, ConfigType = {}> {
   // g6 graph to use
   protected graph: Graph | null = null;
-
-  protected G6Core = G6;
 
   protected data: DataType | GraphData;
 
@@ -69,7 +67,7 @@ export default class DiceGraph<DataType = {}, ConfigType = {}> {
         height,
         ...this.config,
       }
-      return new G6.Graph(mixConfig);
+      return new Graph(mixConfig);
     } else {
       console.warn(el, "mount element was not found");
       return null;
@@ -110,7 +108,7 @@ export default class DiceGraph<DataType = {}, ConfigType = {}> {
 
   protected registerCustomSetting(): void {}
 
-  protected checkData = (data: DataType) => {
+  protected checkData(data: DataType): boolean {
     return true;
   };
 

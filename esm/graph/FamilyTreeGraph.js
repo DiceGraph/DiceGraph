@@ -22,38 +22,45 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
+import { Tooltip, registerLayout, registerNode, registerEdge } from "@antv/g6/es";
 import DiceGraph from "../base/DiceGraph";
+import { mixConfig } from "../util/config";
 import { textCut } from "../util/text";
+export var familyTreeGraphOption = {
+    fitView: true,
+    layout: {
+        type: "dice-family-tree",
+    },
+    modes: {
+        default: ["drag-canvas", "zoom-canvas"],
+    },
+    defaultNode: {
+        size: [120, 60],
+        type: "dice-familytree-node",
+        anchorPoints: [
+            [0.5, 0],
+            [0.5, 1],
+        ],
+    },
+    defaultEdge: {
+        type: "dice-familytree-edge",
+        style: {
+            lineWidth: 2,
+        },
+    },
+    plugins: [
+        new Tooltip({
+            getContent: function (e) {
+                var cfg = e.item.get("model");
+                return "\n      <div>\n        <h4>" + cfg.name + "</h4>\n        <p>" + (cfg.desc || "") + "</p>\n      </div>\n      ";
+            },
+        }),
+    ],
+};
 var FamilyTreeGraph = /** @class */ (function (_super) {
     __extends(FamilyTreeGraph, _super);
-    function FamilyTreeGraph() {
-        var _this = _super.call(this, {
-            fitView: true,
-            layout: {
-                type: "dice-family-tree",
-            },
-            modes: {
-                default: ['drag-canvas', 'zoom-canvas']
-            },
-            defaultNode: {
-                size: [120, 60],
-                type: 'dice-familytree-node',
-                anchorPoints: [[0.5, 0], [0.5, 1]]
-            },
-            defaultEdge: {
-                type: 'dice-familytree-edge',
-                style: {
-                    lineWidth: 2
-                }
-            },
-        }) || this;
-        _this.config.plugins = [new _this.G6Core.Tooltip({
-                getContent: function (e) {
-                    var cfg = e.item.get('model');
-                    return "\n        <div>\n          <h4>" + cfg.name + "</h4>\n          <p>" + (cfg.desc || '') + "</p>\n        </div>\n        ";
-                }
-            })];
-        return _this;
+    function FamilyTreeGraph(userConfig) {
+        return _super.call(this, mixConfig(familyTreeGraphOption, userConfig)) || this;
     }
     FamilyTreeGraph.prototype.dataTransform = function (data) {
         var nodes = [];
@@ -78,7 +85,7 @@ var FamilyTreeGraph = /** @class */ (function (_super) {
                     });
                     var res = readFamilyTree(child, level + 1, {
                         node: startAtOffset.node + currentLevel.node - 0.5,
-                        gap: startAtOffset.gap + currentLevel.gap - 1
+                        gap: startAtOffset.gap + currentLevel.gap - 1,
                     });
                     currentLevel.node += res.node;
                     currentLevel.gap += res.gap;
@@ -99,8 +106,7 @@ var FamilyTreeGraph = /** @class */ (function (_super) {
         };
     };
     FamilyTreeGraph.prototype.registerCustomSetting = function () {
-        var G6 = this.G6Core;
-        G6.registerLayout("dice-family-tree", {
+        registerLayout("dice-family-tree", {
             execute: function () {
                 this.layout(this);
             },
@@ -131,30 +137,48 @@ var FamilyTreeGraph = /** @class */ (function (_super) {
                 return data;
             },
         });
-        G6.registerNode('dice-familytree-node', {
-            jsx: function (cfg) { return "\n        <group>\n          <rect style={{ height: 60, width: 160, radius: 6, fill: #fff, shadowBlur: 5, shadowColor: #ddd, shadowOffsetX: 4, shadowOffsetY: 4 }}>\n          <text style={{ marginLeft: 34, marginTop: " + (cfg.desc ? 8 : 22) + ", fontWeight: bold, fontSize: 14 }}>" + cfg.name + "</text>\n          <text style={{ marginLeft: 6, marginTop: 18 }}>" + textCut((cfg.desc || ''), 26) + "</text>\n          </rect>\n          <rect style={{ width: 24, height: 24, marginLeft: 6, marginTop: " + (cfg.desc ? -56 : -42) + ", stroke: " + (cfg.gender === 'female' ? '#FF99C3' : (cfg.gender === 'male' ? '#5B8FF9' : '#999')) + ", lineWidth: 3 }} />\n          " + (cfg.img ? "<image style={{ marginLeft: 6, width: 24, height: 24, img: " + cfg.img + ", radius: 12 }} />" : '') + "\n        </group>\n      "; },
+        registerNode("dice-familytree-node", {
+            jsx: function (cfg) { return "\n        <group>\n          <rect draggable=\"true\" style={{ height: 60, width: 160, radius: 6, fill: #fff, shadowBlur: 5, shadowColor: #ddd, shadowOffsetX: 4, shadowOffsetY: 4 }}>\n          <text style={{ marginLeft: 34, marginTop: " + (cfg.desc ? 8 : 22) + ", fontWeight: bold, fontSize: 14 }}>" + cfg.name + "</text>\n          <text style={{ marginLeft: 6, marginTop: 18 }}>" + textCut((cfg.desc || ""), 26) + "</text>\n          </rect>\n          <rect style={{ width: 24, height: 24, marginLeft: 6, marginTop: " + (cfg.desc ? -56 : -42) + ", stroke: " + (cfg.gender === "female"
+                ? "#FF99C3"
+                : cfg.gender === "male"
+                    ? "#5B8FF9"
+                    : "#999") + ", lineWidth: 3 }} />\n          " + (cfg.img
+                ? "<image style={{ marginLeft: 6, width: 24, height: 24, img: " + cfg.img + ", radius: 12 }} />"
+                : "") + "\n        </group>\n      "; },
             getAnchorPoints: function (cfg) {
                 if (cfg.mate) {
-                    return [[0, 0], [0, 1]];
+                    return [
+                        [0, 0],
+                        [0, 1],
+                    ];
                 }
                 if (cfg.hasMate) {
-                    return [[1, 0], [1, 1]];
+                    return [
+                        [1, 0],
+                        [1, 1],
+                    ];
                 }
-                return [[0.5, 1], [0.5, 0]];
-            }
+                return [
+                    [0.5, 1],
+                    [0.5, 0],
+                ];
+            },
         });
-        G6.registerEdge('dice-familytree-edge', {
+        registerEdge("dice-familytree-edge", {
             getControlPoints: function (cfg) {
                 var startPoint = cfg.startPoint, endPoint = cfg.endPoint;
-                return [{
+                return [
+                    {
                         x: startPoint.x,
-                        y: (startPoint.y + endPoint.y) / 2
-                    }, {
+                        y: (startPoint.y + endPoint.y) / 2,
+                    },
+                    {
                         x: endPoint.x,
-                        y: (startPoint.y + endPoint.y) / 2
-                    }];
-            }
-        }, 'polyline');
+                        y: (startPoint.y + endPoint.y) / 2,
+                    },
+                ];
+            },
+        }, "polyline");
     };
     return FamilyTreeGraph;
 }(DiceGraph));
