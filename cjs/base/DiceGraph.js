@@ -21,7 +21,6 @@ var DiceGraph = /** @class */ (function () {
         var _a;
         // g6 graph to use
         this.graph = null;
-        this.G6Core = es_1.default;
         this.tree = false;
         this.colors = {
             color: "#096dd9",
@@ -44,7 +43,7 @@ var DiceGraph = /** @class */ (function () {
                 var height = target.clientHeight;
                 var mixConfig = __assign({ container: el, width: width,
                     height: height }, _this.config);
-                return new es_1.default.Graph(mixConfig);
+                return new es_1.Graph(mixConfig);
             }
             else {
                 console.warn(el, "mount element was not found");
@@ -63,9 +62,6 @@ var DiceGraph = /** @class */ (function () {
             if (_this.graph) {
                 return _this.graph.get("data");
             }
-        };
-        this.checkData = function (data) {
-            return true;
         };
         if (config) {
             var color = __assign(__assign({}, colors), this.colors);
@@ -89,6 +85,10 @@ var DiceGraph = /** @class */ (function () {
         }
     };
     DiceGraph.prototype.registerCustomSetting = function () { };
+    DiceGraph.prototype.checkData = function (data) {
+        return true;
+    };
+    ;
     DiceGraph.prototype.dataTransform = function (data) {
         return data;
     };

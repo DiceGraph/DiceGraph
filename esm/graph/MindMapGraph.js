@@ -22,45 +22,53 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
+import { Util, registerNode } from "@antv/g6/es";
 import TreeGraph from "../base/TreeGraph";
+import { mixConfig } from "../util/config";
+export var mindMapGraphOption = {
+    fitView: true,
+    fitViewPadding: [10, 20],
+    layout: {
+        type: 'mindmap',
+        direction: 'H',
+        getHeight: function () {
+            return 16;
+        },
+        getWidth: function (node) {
+            return node.level === 0 ? Util.getTextSize(node.label, 16)[0] + 12 : Util.getTextSize(node.label, 12)[0];
+        },
+        getVGap: function () {
+            return 10;
+        },
+        getHGap: function () {
+            return 60;
+        },
+    },
+    defaultEdge: {
+        type: 'cubic-horizontal',
+        style: {
+            lineWidth: 2,
+        }
+    },
+    modes: {
+        default: [
+            {
+                type: 'collapse-expand',
+                onChange: function onChange(item, collapsed) {
+                    var data = item.get('model').data;
+                    data.collapsed = collapsed;
+                    return true;
+                },
+            },
+            'drag-canvas',
+            'zoom-canvas',
+        ],
+    }
+};
 var MindMapGraph = /** @class */ (function (_super) {
     __extends(MindMapGraph, _super);
     function MindMapGraph(userConfig) {
-        if (userConfig === void 0) { userConfig = {}; }
-        var _this = _super.call(this, __assign({ fitView: true, fitViewPadding: [10, 20], layout: {
-                type: 'mindmap',
-                direction: 'H',
-                getHeight: function () {
-                    return 16;
-                },
-                getWidth: function (node) {
-                    return node.level === 0 ? _this.G6Core.Util.getTextSize(node.label, 16)[0] + 12 : _this.G6Core.Util.getTextSize(node.label, 12)[0];
-                },
-                getVGap: function () {
-                    return 10;
-                },
-                getHGap: function () {
-                    return 60;
-                },
-            }, defaultEdge: {
-                type: 'cubic-horizontal',
-                style: {
-                    lineWidth: 2,
-                }
-            }, modes: {
-                default: [
-                    {
-                        type: 'collapse-expand',
-                        onChange: function onChange(item, collapsed) {
-                            var data = item.get('model').data;
-                            data.collapsed = collapsed;
-                            return true;
-                        },
-                    },
-                    'drag-canvas',
-                    'zoom-canvas',
-                ],
-            } }, userConfig)) || this;
+        var _this = _super.call(this, mixConfig(mindMapGraphOption, userConfig)) || this;
         _this.tree = true;
         return _this;
     }
@@ -90,33 +98,32 @@ var MindMapGraph = /** @class */ (function (_super) {
         return changeData(data);
     };
     MindMapGraph.prototype.registerCustomSetting = function () {
-        var G6Core = this.G6Core;
-        G6Core.registerNode('dice-mind-map-root', {
+        registerNode('dice-mind-map-root', {
             jsx: function (cfg) {
-                var width = G6Core.Util.getTextSize(cfg.label, 16)[0] + 24;
+                var width = Util.getTextSize(cfg.label, 16)[0] + 24;
                 var stroke = cfg.style.stroke || '#096dd9';
                 var fill = cfg.style.fill;
-                return "\n          <group>\n            <rect style={{width: " + width + ", height: 42, stroke: " + stroke + ", fill: " + fill + ", radius: 4}} keyshape>\n              <text style={{ fontSize: 16, marginLeft: 12, marginTop: 12 }}>" + cfg.label + "</text>\n            </rect>\n          </group>\n        ";
+                return "\n          <group>\n            <rect draggable=\"true\" style={{width: " + width + ", height: 42, stroke: " + stroke + ", fill: " + fill + ", radius: 4}} keyshape>\n              <text style={{ fontSize: 16, marginLeft: 12, marginTop: 12 }}>" + cfg.label + "</text>\n            </rect>\n          </group>\n        ";
             },
             getAnchorPoints: function () {
                 return [[0, 0.5], [1, 0.5]];
             }
         }, 'single-node');
-        G6Core.registerNode('dice-mind-map-sub', {
+        registerNode('dice-mind-map-sub', {
             jsx: function (cfg) {
-                var width = G6Core.Util.getTextSize(cfg.label, 14)[0] + 24;
+                var width = Util.getTextSize(cfg.label, 14)[0] + 24;
                 var color = cfg.color || cfg.style.stroke;
-                return "\n          <group>\n            <rect style={{width: " + width + ", height: 22}}>\n              <text style={{ fontSize: 14, marginLeft: 12, marginTop: 6 }}>" + cfg.label + "</text>\n            </rect>\n            <rect style={{ fill: " + color + ", width: " + width + ", height: 4, x: 0, y: 22 }} />\n          </group>\n        ";
+                return "\n          <group>\n            <rect draggable=\"true\" style={{width: " + width + ", height: 22}}>\n              <text style={{ fontSize: 14, marginLeft: 12, marginTop: 6 }}>" + cfg.label + "</text>\n            </rect>\n            <rect style={{ fill: " + color + ", width: " + width + ", height: 4, x: 0, y: 22 }} />\n          </group>\n        ";
             },
             getAnchorPoints: function () {
                 return [[0, 1], [1, 1]];
             }
         }, 'single-node');
-        G6Core.registerNode('dice-mind-map-leaf', {
+        registerNode('dice-mind-map-leaf', {
             jsx: function (cfg) {
-                var width = G6Core.Util.getTextSize(cfg.label, 12)[0] + 24;
+                var width = Util.getTextSize(cfg.label, 12)[0] + 24;
                 var color = cfg.color || cfg.style.stroke;
-                return "\n          <group>\n            <rect style={{width: " + width + ", height: 22 }}>\n              <text style={{ fontSize: 12, marginLeft: 12, marginTop: 6 }}>" + cfg.label + "</text>\n            </rect>\n            <rect style={{ fill: " + color + ", width: " + width + ", height: 2, x: 0, y: 32 }} />\n          </group>\n        ";
+                return "\n          <group>\n            <rect draggable=\"true\" style={{width: " + width + ", height: 22 }}>\n              <text style={{ fontSize: 12, marginLeft: 12, marginTop: 6 }}>" + cfg.label + "</text>\n            </rect>\n            <rect style={{ fill: " + color + ", width: " + width + ", height: 2, x: 0, y: 32 }} />\n          </group>\n        ";
             },
             getAnchorPoints: function () {
                 return [[0, 1], [1, 1]];

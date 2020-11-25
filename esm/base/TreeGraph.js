@@ -22,6 +22,7 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
+import { TreeGraph as G6Tree } from '@antv/g6/es';
 import DiceGraph from "./DiceGraph";
 var TreeGraph = /** @class */ (function (_super) {
     __extends(TreeGraph, _super);
@@ -41,7 +42,7 @@ var TreeGraph = /** @class */ (function (_super) {
                 var height = target.clientHeight;
                 var mixConfig = __assign({ container: el, width: width,
                     height: height }, _this.config);
-                return new _this.G6Core.TreeGraph(mixConfig);
+                return new G6Tree(mixConfig);
             }
             else {
                 console.warn(el, "mount element was not found");
