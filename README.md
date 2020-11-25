@@ -115,8 +115,15 @@ export class AppComponent {
 
 ![MindMapGraph](./site/assets/familytree.jpg)
 
+#### DecisionGraph
+
+![DecisionGraph](./site/assets/DecisionGraph.jpg)
+
 
 ### Release Notes
+
+- 0.3.2
+  - 🎉 Support Mindmap and Familytree
 
 - 0.3.0
   - 🎉 Support Mindmap and Familytree
