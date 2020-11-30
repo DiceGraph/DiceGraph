@@ -41,7 +41,7 @@ export default (props) => {
               `
 import { ${className} } from 'dice-graph';
 
-const instance = new ${className}({});
+const instance = new ${className}();
 
 // DOM node that your graph render
 const el = document.getElementById('target');
@@ -56,7 +56,7 @@ instance.mount(el);
           <h5>
         Data Structure
       </h5>
-      <pre className="code-pool">
+      <pre className="code-pool" style={{ height: 120 }}>
         {JSON.stringify(structure, null, 2)}
       </pre>
         </div>
