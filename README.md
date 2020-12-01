@@ -119,11 +119,16 @@ export class AppComponent {
 
 ![DecisionGraph](./site/assets/DecisionGraph.jpg)
 
+#### ERGraph
+
+![ERGraph](./site/assets/ER.jpg)
+
 
 ### Release Notes
 
+- 0.3.3
+  - 🎉 Support ER Graph
 - 0.3.2
-  - 🎉 Support Mindmap and Familytree
-
+  - 🎉 Support Decision Tree
 - 0.3.0
   - 🎉 Support Mindmap and Familytree

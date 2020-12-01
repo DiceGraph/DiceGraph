@@ -26,7 +26,7 @@ export declare const familyTreeGraphOption: {
             lineWidth: number;
         };
     };
-    plugins: import("_@antv_g6@4.0.0@@antv/g6/es/plugins/tooltip").default[];
+    plugins: import("_@antv_g6@3.8.5@@antv/g6/es/plugins/tooltip").default[];
 };
 export default class FamilyTreeGraph extends DiceGraph<FamilyTreeNode> {
     constructor(userConfig: Partial<GraphOptions>);
