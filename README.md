@@ -8,6 +8,34 @@
 
 ## Quick Start
 
+### Static Usage
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>DiceGraph</title>
+    <script src="https://unpkg.com/dice-graph@latest"></script>
+  </head>
+  <body>
+    <div id="blabrablah"></div>
+  </body>
+  <script>
+    const { GraphClass } = DiceGraph;
+    const instance = new GraphClass({
+      width: 800,
+      height: 600
+    });
+
+    instance.setData(data);
+    instance.mount(document.getElementById("blabrablah"));
+  </script>
+</html>
+
+```
+
+### Module Usage
 ```bash
 npm install --save dice-graph
 yarn add dice-graph
