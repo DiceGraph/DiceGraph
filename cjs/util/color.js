@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.generateStyleFromColor = void 0;
+exports.colorArr = exports.generateStyleFromColor = void 0;
 var BaseColor = require("color");
 var Color = BaseColor;
-if (typeof Color !== 'function') {
+if (typeof Color !== "function") {
     Color = BaseColor.default;
 }
 var generateStyleFromColor = function (front, back) {
-    if (back === void 0) { back = '#fff'; }
+    if (back === void 0) { back = "#fff"; }
     var color = Color(front);
     var bgColor = Color(back);
     return {
@@ -40,4 +40,26 @@ var generateStyleFromColor = function (front, back) {
     };
 };
 exports.generateStyleFromColor = generateStyleFromColor;
+exports.colorArr = [
+    "#5B8FF9",
+    "#5AD8A6",
+    "#5D7092",
+    "#F6BD16",
+    "#6F5EF9",
+    "#6DC8EC",
+    "#D3EEF9",
+    "#DECFEA",
+    "#FFE0C7",
+    "#1E9493",
+    "#BBDEDE",
+    "#FF99C3",
+    "#FFE0ED",
+    "#CDDDFD",
+    "#CDF3E4",
+    "#CED4DE",
+    "#FCEBB9",
+    "#D3CEFD",
+    "#945FB9",
+    "#FF9845"
+];
 //# sourceMappingURL=color.js.map

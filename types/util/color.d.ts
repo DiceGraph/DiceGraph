@@ -26,3 +26,4 @@ export declare const generateStyleFromColor: (front: any, back?: string) => {
         };
     };
 };
+export declare const colorArr: string[];

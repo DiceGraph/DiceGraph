@@ -151,9 +151,13 @@ export class AppComponent {
 
 ![ERGraph](./site/assets/ER.jpg)
 
+#### SankeyGraph
+
+![ERGraph](./site/assets/Sankey.jpg)
 
 ### Release Notes
-
+- 0.3.5
+  - 🎉 Support Sankey Graph
 - 0.3.3
   - 🎉 Support ER Graph
 - 0.3.2
