@@ -1,6 +1,6 @@
 {
   "name": "dice-graph",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "description": "Graph out of box",
   "module": "esm/index.js",
   "main": "cjs/index.js",
