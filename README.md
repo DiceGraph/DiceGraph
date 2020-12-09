@@ -153,7 +153,7 @@ export class AppComponent {
 
 #### SankeyGraph
 
-![ERGraph](./site/assets/Sankey.jpg)
+![SankeyGraph](./site/assets/Sankey.png)
 
 ### Release Notes
 - 0.3.5
