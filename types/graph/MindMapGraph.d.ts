@@ -1,7 +1,7 @@
 import { GraphOptions } from "@antv/g6/es/types";
 import TreeGraph from "../base/TreeGraph";
 export declare type MindMapGraphNode = {
-    direction?: 'left' | 'right';
+    direction?: "left" | "right";
     id: string;
     label: string;
     color?: string;
@@ -17,6 +17,7 @@ export declare const mindMapGraphOption: {
         getWidth: (node: any) => any;
         getVGap: () => number;
         getHGap: () => number;
+        getSide: (node: any) => any;
     };
     defaultEdge: {
         type: string;
@@ -24,11 +25,9 @@ export declare const mindMapGraphOption: {
             lineWidth: number;
         };
     };
+    minZoom: number;
     modes: {
-        default: (string | {
-            type: string;
-            onChange: (item: any, collapsed: any) => boolean;
-        })[];
+        default: string[];
     };
 };
 export default class MindMapGraph extends TreeGraph<MindMapGraphNode> {
@@ -36,4 +35,5 @@ export default class MindMapGraph extends TreeGraph<MindMapGraphNode> {
     dataTransform(data: any): any;
     protected registerCustomSetting(): void;
     afterRender(): void;
+    saveData(): MindMapGraphNode;
 }

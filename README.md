@@ -156,6 +156,8 @@ export class AppComponent {
 ![SankeyGraph](./site/assets/Sankey.png)
 
 ### Release Notes
+- 0.3.6
+  - 🎉 Make Mindmap Editable
 - 0.3.5
   - 🎉 Support Sankey Graph
 - 0.3.3
