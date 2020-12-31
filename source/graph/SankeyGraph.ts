@@ -1,6 +1,5 @@
 import { registerEdge, registerNode } from "@antv/g6/es";
 import { GraphOptions } from "@antv/g6/es/types";
-import source from "..";
 import DiceGraph from "../base/DiceGraph";
 import { colorArr } from "../util/color";
 import { mixConfig } from "../util/config";
