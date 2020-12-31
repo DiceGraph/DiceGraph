@@ -44,7 +44,7 @@ export const mindMapGraphOption = {
   },
   minZoom: 0.5,
   modes: {
-    default: ["scroll-canvas", "dice-mindmap"],
+    default: ["drag-canvas", "dice-mindmap"],
   },
 };
 
@@ -299,14 +299,14 @@ export default class MindMapGraph extends TreeGraph<MindMapGraphNode> {
         };
         const clickEvt = (event) => {
           if (!event.target["className"]?.includes("dice-input")) {
-            window.removeEventListener("click", clickEvt);
+            window.removeEventListener("mousedown", clickEvt);
             window.removeEventListener("scroll", clickEvt);
             evt.currentTarget.updateItem(item, { label: input.value });
             evt.currentTarget.refreshLayout(false);
             destroyEl();
           }
         };
-        window.addEventListener("click", clickEvt);
+        window.addEventListener("mousedown", clickEvt);
         window.addEventListener("scroll", clickEvt);
         input.addEventListener("keyup", (event) => {
           if (event.key === "Enter") {
