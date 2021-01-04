@@ -61,7 +61,7 @@ exports.mindMapGraphOption = {
     },
     minZoom: 0.5,
     modes: {
-        default: ["drag-canvas", "dice-mindmap"],
+        default: ["drag-canvas", "zoom-canvas", "dice-mindmap"],
     },
 };
 var MindMapGraph = /** @class */ (function (_super) {
@@ -124,12 +124,12 @@ var MindMapGraph = /** @class */ (function (_super) {
             jsx: function (cfg) {
                 var width = es_1.Util.getTextSize(cfg.label, 14)[0] + 24;
                 var color = cfg.color || cfg.style.stroke;
-                return "\n          <group>\n            <rect draggable=\"true\" style={{width: " + (width + 24) + ", height: 22}} keyshape>\n              <text draggable=\"true\" style={{ fontSize: 14, marginLeft: 12, marginTop: 6 }}>" + cfg.label + "</text>\n              <text style={{ marginLeft: " + (width - 8) + ", marginTop: -10, stroke: " + color + ", fill: '#000', cursor: 'pointer', opacity: " + (cfg.hover ? 0.75 : 0) + ", next: 'inline' }} action=\"add\">+</text>\n              <text style={{ marginLeft: " + (width - 4) + ", marginTop: -10, stroke: " + color + ", fill: '#000', cursor: 'pointer', opacity: " + (cfg.hover ? 0.75 : 0) + ", next: 'inline' }} action=\"delete\">-</text>\n            </rect>\n            <rect style={{ fill: " + color + ", width: " + (width + 24) + ", height: 4, x: 0, y: 22 }} />\n            \n          </group>\n        ";
+                return "\n          <group>\n            <rect draggable=\"true\" style={{width: " + (width + 24) + ", height: 22}} keyshape>\n              <text draggable=\"true\" style={{ fontSize: 14, marginLeft: 12, marginTop: 6 }}>" + cfg.label + "</text>\n              <text style={{ marginLeft: " + (width - 8) + ", marginTop: -10, stroke: " + color + ", fill: '#000', cursor: 'pointer', opacity: " + (cfg.hover ? 0.75 : 0) + ", next: 'inline' }} action=\"add\">+</text>\n              <text style={{ marginLeft: " + (width - 4) + ", marginTop: -10, stroke: " + color + ", fill: '#000', cursor: 'pointer', opacity: " + (cfg.hover ? 0.75 : 0) + ", next: 'inline' }} action=\"delete\">-</text>\n            </rect>\n            <rect style={{ fill: " + color + ", width: " + (width + 24) + ", height: 2, x: 0, y: 22 }} />\n            \n          </group>\n        ";
             },
             getAnchorPoints: function () {
                 return [
-                    [0, 1],
-                    [1, 1],
+                    [0, 0.965],
+                    [1, 0.965],
                 ];
             },
         }, "single-node");
@@ -141,8 +141,8 @@ var MindMapGraph = /** @class */ (function (_super) {
             },
             getAnchorPoints: function () {
                 return [
-                    [0, 1],
-                    [1, 1],
+                    [0, 0.965],
+                    [1, 0.965],
                 ];
             },
         }, "single-node");
@@ -201,6 +201,7 @@ var MindMapGraph = /** @class */ (function (_super) {
                 var item = evt.item;
                 var model = item.get("model");
                 var _a = item.calculateBBox(), x = _a.x, y = _a.y;
+                var graph = evt.currentTarget;
                 var realPosition = evt.currentTarget.getClientByPoint(x, y);
                 var el = document.createElement("div");
                 var fontSizeMap = {
@@ -219,8 +220,7 @@ var MindMapGraph = /** @class */ (function (_super) {
                 input.style.border = "none";
                 input.value = model.label;
                 input.style.width =
-                    (es_1.Util.getTextSize(model.label, fontSizeMap[model.type])[0] + 100) *
-                        evt.currentTarget.getZoom() +
+                    (es_1.Util.getTextSize(model.label, fontSizeMap[model.type])[0]) +
                         "px";
                 input.className = "dice-input";
                 el.className = "dice-input";
@@ -231,14 +231,16 @@ var MindMapGraph = /** @class */ (function (_super) {
                 };
                 var clickEvt = function (event) {
                     var _a;
-                    if (!((_a = event.target["className"]) === null || _a === void 0 ? void 0 : _a.includes("dice-input"))) {
+                    if (!((_a = event === null || event === void 0 ? void 0 : event.target["className"]) === null || _a === void 0 ? void 0 : _a.includes("dice-input"))) {
                         window.removeEventListener("mousedown", clickEvt);
                         window.removeEventListener("scroll", clickEvt);
-                        evt.currentTarget.updateItem(item, { label: input.value });
-                        evt.currentTarget.refreshLayout(false);
+                        graph.updateItem(item, { label: input.value });
+                        graph.refreshLayout(false);
+                        graph.off('wheelZoom', clickEvt);
                         destroyEl();
                     }
                 };
+                graph.on('wheelZoom', clickEvt);
                 window.addEventListener("mousedown", clickEvt);
                 window.addEventListener("scroll", clickEvt);
                 input.addEventListener("keyup", function (event) {
