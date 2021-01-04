@@ -1,4 +1,4 @@
-import { Util, registerNode, registerBehavior } from "@antv/g6/es";
+import { Util, registerNode, registerBehavior, registerEdge } from "@antv/g6/es";
 import { GraphOptions } from "@antv/g6/es/types";
 import TreeGraph from "../base/TreeGraph";
 import { colorArr } from "../util/color";
@@ -44,7 +44,7 @@ export const mindMapGraphOption = {
   },
   minZoom: 0.5,
   modes: {
-    default: ["drag-canvas", "dice-mindmap"],
+    default: ["drag-canvas", "zoom-canvas","dice-mindmap"],
   },
 };
 
@@ -153,15 +153,15 @@ export default class MindMapGraph extends TreeGraph<MindMapGraphNode> {
             </rect>
             <rect style={{ fill: ${color}, width: ${
             width + 24
-          }, height: 4, x: 0, y: 22 }} />
+          }, height: 2, x: 0, y: 22 }} />
             
           </group>
         `;
         },
         getAnchorPoints() {
           return [
-            [0, 1],
-            [1, 1],
+            [0, 0.965],
+            [1, 0.965],
           ];
         },
       },
@@ -202,8 +202,8 @@ export default class MindMapGraph extends TreeGraph<MindMapGraphNode> {
         },
         getAnchorPoints() {
           return [
-            [0, 1],
-            [1, 1],
+            [0, 0.965],
+            [1, 0.965],
           ];
         },
       },
@@ -268,6 +268,7 @@ export default class MindMapGraph extends TreeGraph<MindMapGraphNode> {
         const item = evt.item;
         const model = item.get("model");
         const { x, y } = item.calculateBBox();
+        const graph = evt.currentTarget;
         const realPosition = evt.currentTarget.getClientByPoint(x, y);
         const el = document.createElement("div");
         const fontSizeMap = {
@@ -286,10 +287,8 @@ export default class MindMapGraph extends TreeGraph<MindMapGraphNode> {
         input.style.border = "none";
         input.value = model.label;
         input.style.width =
-          (Util.getTextSize(model.label, fontSizeMap[model.type])[0] + 100) *
-            evt.currentTarget.getZoom() +
+          (Util.getTextSize(model.label, fontSizeMap[model.type])[0]) +
           "px";
-
         input.className = "dice-input";
         el.className = "dice-input";
         el.appendChild(input);
@@ -298,14 +297,16 @@ export default class MindMapGraph extends TreeGraph<MindMapGraphNode> {
           document.body.removeChild(el);
         };
         const clickEvt = (event) => {
-          if (!event.target["className"]?.includes("dice-input")) {
+          if (!event?.target["className"]?.includes("dice-input")) {
             window.removeEventListener("mousedown", clickEvt);
             window.removeEventListener("scroll", clickEvt);
-            evt.currentTarget.updateItem(item, { label: input.value });
-            evt.currentTarget.refreshLayout(false);
+            graph.updateItem(item, { label: input.value });
+            graph.refreshLayout(false);
+            graph.off('wheelZoom', clickEvt)
             destroyEl();
           }
         };
+        graph.on('wheelZoom', clickEvt)
         window.addEventListener("mousedown", clickEvt);
         window.addEventListener("scroll", clickEvt);
         input.addEventListener("keyup", (event) => {
