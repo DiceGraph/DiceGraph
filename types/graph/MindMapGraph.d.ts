@@ -1,4 +1,4 @@
-import { GraphOptions } from "@antv/g6/es/types";
+import { GraphOptions } from "@antv/g6";
 import TreeGraph from "../base/TreeGraph";
 export declare type MindMapGraphNode = {
     direction?: "left" | "right";

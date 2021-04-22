@@ -6,6 +6,8 @@ var __extends = (this && this.__extends) || (function () {
         return extendStatics(d, b);
     };
     return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -22,7 +24,7 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
-import { Util, registerNode, registerBehavior } from "@antv/g6/es";
+import { Util, registerNode, registerBehavior } from "@antv/g6";
 import TreeGraph from "../base/TreeGraph";
 import { colorArr } from "../util/color";
 import { mixConfig } from "../util/config";

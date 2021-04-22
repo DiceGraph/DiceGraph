@@ -7,6 +7,8 @@ var __extends = (this && this.__extends) || (function () {
         return extendStatics(d, b);
     };
     return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -25,7 +27,7 @@ var __assign = (this && this.__assign) || function () {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.decisionGraphOptions = void 0;
-var es_1 = require("@antv/g6/es");
+var g6_1 = require("@antv/g6");
 var DiceGraph_1 = require("../base/DiceGraph");
 var config_1 = require("../util/config");
 exports.decisionGraphOptions = {
@@ -80,7 +82,7 @@ var DecisionGraph = /** @class */ (function (_super) {
                     });
                 });
             }
-            var width = Math.max(es_1.Util.getTextSize(d.label, 14)[0] + 20, Object.keys(d.options || {}).length * 40);
+            var width = Math.max(g6_1.Util.getTextSize(d.label, 14)[0] + 20, Object.keys(d.options || {}).length * 40);
             return __assign(__assign({ width: width, size: [width, 40] }, d), { type: "dice-decision-node" });
         });
         return {
@@ -90,7 +92,7 @@ var DecisionGraph = /** @class */ (function (_super) {
     };
     DecisionGraph.prototype.registerCustomSetting = function () {
         var _this = this;
-        es_1.registerNode("dice-decision-node", {
+        g6_1.registerNode("dice-decision-node", {
             jsx: function (cfg) {
                 var _a = cfg.options, options = _a === void 0 ? {} : _a;
                 var optLen = Object.keys(options).length;
@@ -109,7 +111,7 @@ var DecisionGraph = /** @class */ (function (_super) {
                 ];
             },
         }, "single-node");
-        es_1.registerEdge('dice-decision-edge', {
+        g6_1.registerEdge('dice-decision-edge', {
             getPathPoints: function (cfg) {
                 var _a = _this.graph.findById(cfg.source).get('model').options, options = _a === void 0 ? {} : _a;
                 var optLen = Object.keys(options).length;

@@ -1,5 +1,5 @@
-import { Util, registerNode, registerBehavior, registerEdge } from "@antv/g6/es";
-import { GraphOptions } from "@antv/g6/es/types";
+import { Util, registerNode, registerBehavior, registerEdge } from "@antv/g6";
+import { GraphOptions } from "@antv/g6";
 import TreeGraph from "../base/TreeGraph";
 import { colorArr } from "../util/color";
 import { mixConfig } from "../util/config";

@@ -1,4 +1,4 @@
-import { GraphOptions } from "@antv/g6/es/types";
+import { GraphOptions } from "@antv/g6";
 import DiceGraph from "../base/DiceGraph";
 declare type FamilyTreeNode = {
     img?: string;
@@ -26,7 +26,7 @@ export declare const familyTreeGraphOption: {
             lineWidth: number;
         };
     };
-    plugins: import("_@antv_g6@3.8.5@@antv/g6/es/plugins/tooltip").default[];
+    plugins: import("_@antv_g6-plugin@0.2.7@@antv/g6-plugin").Tooltip[];
 };
 export default class FamilyTreeGraph extends DiceGraph<FamilyTreeNode> {
     constructor(userConfig: Partial<GraphOptions>);

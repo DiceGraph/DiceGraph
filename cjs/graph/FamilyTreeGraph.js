@@ -7,6 +7,8 @@ var __extends = (this && this.__extends) || (function () {
         return extendStatics(d, b);
     };
     return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -25,7 +27,7 @@ var __assign = (this && this.__assign) || function () {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.familyTreeGraphOption = void 0;
-var es_1 = require("@antv/g6/es");
+var g6_1 = require("@antv/g6");
 var DiceGraph_1 = require("../base/DiceGraph");
 var config_1 = require("../util/config");
 var text_1 = require("../util/text");
@@ -52,7 +54,7 @@ exports.familyTreeGraphOption = {
         },
     },
     plugins: [
-        new es_1.Tooltip({
+        new g6_1.Tooltip({
             getContent: function (e) {
                 var cfg = e.item.get("model");
                 return "\n      <div>\n        <h4>" + cfg.name + "</h4>\n        <p>" + (cfg.desc || "") + "</p>\n      </div>\n      ";
@@ -109,7 +111,7 @@ var FamilyTreeGraph = /** @class */ (function (_super) {
         };
     };
     FamilyTreeGraph.prototype.registerCustomSetting = function () {
-        es_1.registerLayout("dice-family-tree", {
+        g6_1.registerLayout("dice-family-tree", {
             execute: function () {
                 this.layout(this);
             },
@@ -140,7 +142,7 @@ var FamilyTreeGraph = /** @class */ (function (_super) {
                 return data;
             },
         });
-        es_1.registerNode("dice-familytree-node", {
+        g6_1.registerNode("dice-familytree-node", {
             jsx: function (cfg) { return "\n        <group>\n          <rect draggable=\"true\" style={{ height: 60, width: 160, radius: 6, fill: #fff, shadowBlur: 5, shadowColor: #ddd, shadowOffsetX: 4, shadowOffsetY: 4 }}>\n          <text style={{ marginLeft: 34, marginTop: " + (cfg.desc ? 8 : 22) + ", fontWeight: bold, fontSize: 14 }}>" + cfg.name + "</text>\n          <text style={{ marginLeft: 6, marginTop: 18 }}>" + text_1.textCut((cfg.desc || ""), 26) + "</text>\n          </rect>\n          <rect style={{ width: 24, height: 24, marginLeft: 6, marginTop: " + (cfg.desc ? -56 : -42) + ", stroke: " + (cfg.gender === "female"
                 ? "#FF99C3"
                 : cfg.gender === "male"
@@ -167,7 +169,7 @@ var FamilyTreeGraph = /** @class */ (function (_super) {
                 ];
             },
         });
-        es_1.registerEdge("dice-familytree-edge", {
+        g6_1.registerEdge("dice-familytree-edge", {
             getControlPoints: function (cfg) {
                 var startPoint = cfg.startPoint, endPoint = cfg.endPoint;
                 return [

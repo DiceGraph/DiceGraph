@@ -1,4 +1,4 @@
-import { GraphOptions, EdgeConfig } from "@antv/g6/es/types";
+import { GraphOptions, EdgeConfig } from "@antv/g6";
 import DiceGraph from "../base/DiceGraph";
 declare type DecisionNode = {
     label: string;

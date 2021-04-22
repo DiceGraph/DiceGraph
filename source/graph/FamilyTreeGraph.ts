@@ -1,5 +1,5 @@
-import { Tooltip, registerLayout, registerNode, registerEdge } from "@antv/g6/es";
-import { GraphOptions } from "@antv/g6/es/types";
+import { Tooltip, registerLayout, registerNode, registerEdge } from "@antv/g6";
+import { GraphOptions } from "@antv/g6";
 import DiceGraph from "../base/DiceGraph";
 import { mixConfig } from "../util/config";
 import { textCut } from "../util/text";

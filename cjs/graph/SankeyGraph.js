@@ -7,13 +7,15 @@ var __extends = (this && this.__extends) || (function () {
         return extendStatics(d, b);
     };
     return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var es_1 = require("@antv/g6/es");
+var g6_1 = require("@antv/g6");
 var DiceGraph_1 = require("../base/DiceGraph");
 var color_1 = require("../util/color");
 var config_1 = require("../util/config");
@@ -69,13 +71,13 @@ var SankeyGraph = /** @class */ (function (_super) {
         };
     };
     SankeyGraph.prototype.registerCustomSetting = function () {
-        es_1.registerNode('dice-sankey-node', {
+        g6_1.registerNode('dice-sankey-node', {
             jsx: function (cfg) { return "\n        <group>\n          <rect style={{ width: " + cfg.size[0] + ", height: " + cfg.size[1] + ", fill: " + cfg.color + " }} />\n          <text style={{ marginLeft: 6, marginTop: 24,  fill: #333, stroke: " + cfg.color + ", lineWidth: 2, fontSize: 24 }}>" + cfg.label + " " + cfg.size[1] + "</text>\n        </group>\n      "; },
             getAnchorPoints: function () {
                 return [[0, 0]];
             }
         }, 'single-node');
-        es_1.registerEdge('dice-sankey-edge', {
+        g6_1.registerEdge('dice-sankey-edge', {
             draw: function (cfg, group) {
                 var startPoint = cfg.startPoint, endPoint = cfg.endPoint, color = cfg.color;
                 var deltaY1 = Number(cfg.sourceIndex);

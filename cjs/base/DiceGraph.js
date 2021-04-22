@@ -11,7 +11,7 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var es_1 = require("@antv/g6/es");
+var g6_1 = require("@antv/g6");
 var color_1 = require("../util/color");
 var DiceGraph = /** @class */ (function () {
     function DiceGraph(config, colors) {
@@ -43,7 +43,7 @@ var DiceGraph = /** @class */ (function () {
                 var height = target.clientHeight;
                 var mixConfig = __assign({ container: el, width: width,
                     height: height }, _this.config);
-                return new es_1.Graph(mixConfig);
+                return new g6_1.Graph(mixConfig);
             }
             else {
                 console.warn(el, "mount element was not found");

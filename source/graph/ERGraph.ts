@@ -3,8 +3,8 @@ import {
   registerEdge,
   registerNode,
   Util,
-} from "@antv/g6/es";
-import { GraphOptions, IPoint, ModelConfig } from "@antv/g6/es/types";
+} from "@antv/g6";
+import { GraphOptions, IPoint, ModelConfig } from "@antv/g6";
 import DiceGraph from "../base/DiceGraph";
 import { mixConfig } from "../util/config";
 

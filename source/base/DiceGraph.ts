@@ -1,5 +1,4 @@
-import{ Graph } from "@antv/g6/es";
-import { GraphData, GraphOptions } from "@antv/g6/es/types";
+import { GraphData, GraphOptions, Graph } from "@antv/g6";
 import { generateStyleFromColor } from "../util/color";
 
 export default class DiceGraph<DataType = {}, ConfigType = {}> {

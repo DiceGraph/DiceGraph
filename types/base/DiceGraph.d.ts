@@ -1,5 +1,4 @@
-import { Graph } from "@antv/g6/es";
-import { GraphData, GraphOptions } from "@antv/g6/es/types";
+import { GraphData, GraphOptions, Graph } from "@antv/g6";
 export default class DiceGraph<DataType = {}, ConfigType = {}> {
     protected graph: Graph | null;
     protected data: DataType | GraphData;

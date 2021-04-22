@@ -9,7 +9,7 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
-import { Graph } from "@antv/g6/es";
+import { Graph } from "@antv/g6";
 import { generateStyleFromColor } from "../util/color";
 var DiceGraph = /** @class */ (function () {
     function DiceGraph(config, colors) {

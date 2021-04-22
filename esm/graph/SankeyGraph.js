@@ -6,12 +6,14 @@ var __extends = (this && this.__extends) || (function () {
         return extendStatics(d, b);
     };
     return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-import { registerEdge, registerNode } from "@antv/g6/es";
+import { registerEdge, registerNode } from "@antv/g6";
 import DiceGraph from "../base/DiceGraph";
 import { colorArr } from "../util/color";
 import { mixConfig } from "../util/config";

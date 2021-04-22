@@ -7,6 +7,8 @@ var __extends = (this && this.__extends) || (function () {
         return extendStatics(d, b);
     };
     return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -24,7 +26,7 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var es_1 = require("@antv/g6/es");
+var g6_1 = require("@antv/g6");
 var DiceGraph_1 = require("../base/DiceGraph");
 var config_1 = require("../util/config");
 var ERGraph = /** @class */ (function (_super) {
@@ -101,7 +103,7 @@ var ERGraph = /** @class */ (function (_super) {
             return x < maxX && x > minX && y > minY && y < maxY;
         };
         var itemHeight = 30;
-        es_1.registerBehavior("dice-er-scroll", {
+        g6_1.registerBehavior("dice-er-scroll", {
             getDefaultCfg: function () {
                 return {
                     multiple: true,
@@ -186,7 +188,7 @@ var ERGraph = /** @class */ (function (_super) {
                 }
             },
         });
-        es_1.registerEdge("dice-er-edge", {
+        g6_1.registerEdge("dice-er-edge", {
             draw: function (cfg, group) {
                 var _a;
                 var edge = group.cfg.item;
@@ -268,14 +270,14 @@ var ERGraph = /** @class */ (function (_super) {
                     return;
                 }
                 var path = group.find(function (element) { return element.get("name") === "path-shape"; });
-                var labelStyle = es_1.Util.getLabelPosition(path, 0.5, 0, 0, true);
+                var labelStyle = g6_1.Util.getLabelPosition(path, 0.5, 0, 0, true);
                 var label = group.addShape("text", {
                     attrs: __assign(__assign({}, labelStyle), { text: cfg.label || '', fill: "#000", textAlign: "center", stroke: "#fff", lineWidth: 1 }),
                 });
                 label.rotateAtStart(labelStyle.rotate);
             },
         });
-        es_1.registerNode("dice-er-box", {
+        g6_1.registerNode("dice-er-box", {
             draw: function (cfg, group) {
                 var width = 250;
                 var height = 316;

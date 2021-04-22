@@ -7,6 +7,8 @@ var __extends = (this && this.__extends) || (function () {
         return extendStatics(d, b);
     };
     return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -24,7 +26,7 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var es_1 = require("@antv/g6/es");
+var g6_1 = require("@antv/g6");
 var DiceGraph_1 = require("./DiceGraph");
 var TreeGraph = /** @class */ (function (_super) {
     __extends(TreeGraph, _super);
@@ -44,7 +46,7 @@ var TreeGraph = /** @class */ (function (_super) {
                 var height = target.clientHeight;
                 var mixConfig = __assign({ container: el, width: width,
                     height: height }, _this.config);
-                return new es_1.TreeGraph(mixConfig);
+                return new g6_1.TreeGraph(mixConfig);
             }
             else {
                 console.warn(el, "mount element was not found");

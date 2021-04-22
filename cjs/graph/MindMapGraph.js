@@ -7,6 +7,8 @@ var __extends = (this && this.__extends) || (function () {
         return extendStatics(d, b);
     };
     return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -25,7 +27,7 @@ var __assign = (this && this.__assign) || function () {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.mindMapGraphOption = void 0;
-var es_1 = require("@antv/g6/es");
+var g6_1 = require("@antv/g6");
 var TreeGraph_1 = require("../base/TreeGraph");
 var color_1 = require("../util/color");
 var config_1 = require("../util/config");
@@ -40,8 +42,8 @@ exports.mindMapGraphOption = {
         },
         getWidth: function (node) {
             return node.level === 0
-                ? es_1.Util.getTextSize(node.label, 16)[0] + 12
-                : es_1.Util.getTextSize(node.label, 12)[0];
+                ? g6_1.Util.getTextSize(node.label, 16)[0] + 12
+                : g6_1.Util.getTextSize(node.label, 12)[0];
         },
         getVGap: function () {
             return 10;
@@ -106,9 +108,9 @@ var MindMapGraph = /** @class */ (function (_super) {
         return changeData(data);
     };
     MindMapGraph.prototype.registerCustomSetting = function () {
-        es_1.registerNode("dice-mind-map-root", {
+        g6_1.registerNode("dice-mind-map-root", {
             jsx: function (cfg) {
-                var width = es_1.Util.getTextSize(cfg.label, 16)[0] + 24;
+                var width = g6_1.Util.getTextSize(cfg.label, 16)[0] + 24;
                 var stroke = cfg.style.stroke || "#096dd9";
                 var fill = cfg.style.fill;
                 return "\n          <group>\n            <rect draggable=\"true\" style={{width: " + width + ", height: 42, stroke: " + stroke + ", fill: " + fill + ", radius: 4}} keyshape>\n              <text style={{ fontSize: 16, marginLeft: 12, marginTop: 12 }}>" + cfg.label + "</text>\n              <text style={{ marginLeft: " + (width - 16) + ", marginTop: -20, stroke: '#66ccff', fill: '#000', cursor: 'pointer', opacity: " + (cfg.hover ? 0.75 : 0) + " }} action=\"add\">+</text>\n            </rect>\n          </group>\n        ";
@@ -120,9 +122,9 @@ var MindMapGraph = /** @class */ (function (_super) {
                 ];
             },
         }, "single-node");
-        es_1.registerNode("dice-mind-map-sub", {
+        g6_1.registerNode("dice-mind-map-sub", {
             jsx: function (cfg) {
-                var width = es_1.Util.getTextSize(cfg.label, 14)[0] + 24;
+                var width = g6_1.Util.getTextSize(cfg.label, 14)[0] + 24;
                 var color = cfg.color || cfg.style.stroke;
                 return "\n          <group>\n            <rect draggable=\"true\" style={{width: " + (width + 24) + ", height: 22}} keyshape>\n              <text draggable=\"true\" style={{ fontSize: 14, marginLeft: 12, marginTop: 6 }}>" + cfg.label + "</text>\n              <text style={{ marginLeft: " + (width - 8) + ", marginTop: -10, stroke: " + color + ", fill: '#000', cursor: 'pointer', opacity: " + (cfg.hover ? 0.75 : 0) + ", next: 'inline' }} action=\"add\">+</text>\n              <text style={{ marginLeft: " + (width - 4) + ", marginTop: -10, stroke: " + color + ", fill: '#000', cursor: 'pointer', opacity: " + (cfg.hover ? 0.75 : 0) + ", next: 'inline' }} action=\"delete\">-</text>\n            </rect>\n            <rect style={{ fill: " + color + ", width: " + (width + 24) + ", height: 2, x: 0, y: 22 }} />\n            \n          </group>\n        ";
             },
@@ -133,9 +135,9 @@ var MindMapGraph = /** @class */ (function (_super) {
                 ];
             },
         }, "single-node");
-        es_1.registerNode("dice-mind-map-leaf", {
+        g6_1.registerNode("dice-mind-map-leaf", {
             jsx: function (cfg) {
-                var width = es_1.Util.getTextSize(cfg.label, 12)[0] + 24;
+                var width = g6_1.Util.getTextSize(cfg.label, 12)[0] + 24;
                 var color = cfg.color || cfg.style.stroke;
                 return "\n          <group>\n            <rect draggable=\"true\" style={{width: " + (width + 20) + ", height: 26, fill: 'transparent' }}>\n              <text style={{ fontSize: 12, marginLeft: 12, marginTop: 6 }}>" + cfg.label + "</text>\n                  <text style={{ marginLeft: " + (width - 8) + ", marginTop: -10, stroke: " + color + ", fill: '#000', cursor: 'pointer', opacity: " + (cfg.hover ? 0.75 : 0) + ", next: 'inline' }} action=\"add\">+</text>\n                  <text style={{ marginLeft: " + (width - 4) + ", marginTop: -10, stroke: " + color + ", fill: '#000', cursor: 'pointer', opacity: " + (cfg.hover ? 0.75 : 0) + ", next: 'inline' }} action=\"delete\">-</text>\n            </rect>\n            <rect style={{ fill: " + color + ", width: " + (width + 24) + ", height: 2, x: 0, y: 32 }} />\n            \n          </group>\n        ";
             },
@@ -146,7 +148,7 @@ var MindMapGraph = /** @class */ (function (_super) {
                 ];
             },
         }, "single-node");
-        es_1.registerBehavior("dice-mindmap", {
+        g6_1.registerBehavior("dice-mindmap", {
             getEvents: function () {
                 return {
                     "node:click": "clickNode",
@@ -220,7 +222,7 @@ var MindMapGraph = /** @class */ (function (_super) {
                 input.style.border = "none";
                 input.value = model.label;
                 input.style.width =
-                    (es_1.Util.getTextSize(model.label, fontSizeMap[model.type])[0]) +
+                    (g6_1.Util.getTextSize(model.label, fontSizeMap[model.type])[0]) +
                         "px";
                 input.className = "dice-input";
                 el.className = "dice-input";
@@ -256,7 +258,7 @@ var MindMapGraph = /** @class */ (function (_super) {
                 evt.currentTarget.updateItem(evt.item, { hover: false });
             },
         });
-        es_1.registerBehavior("scroll-canvas", {
+        g6_1.registerBehavior("scroll-canvas", {
             getEvents: function getEvents() {
                 return {
                     wheel: "onWheel",

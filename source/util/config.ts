@@ -1,4 +1,4 @@
-import { GraphOptions } from "@antv/g6/es/types";
+import { GraphOptions } from "@antv/g6";
 
 const mixObject = <T>(a?: T, b?: T) => {
   return {

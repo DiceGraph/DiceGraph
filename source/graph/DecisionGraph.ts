@@ -1,5 +1,5 @@
-import { Util, registerNode, registerEdge } from "@antv/g6/es";
-import { GraphOptions, EdgeConfig } from "@antv/g6/es/types";
+import { Util, registerNode, registerEdge } from "@antv/g6";
+import { GraphOptions, EdgeConfig } from "@antv/g6";
 import DiceGraph from "../base/DiceGraph";
 import { mixConfig } from "../util/config";
 

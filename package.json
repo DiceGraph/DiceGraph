@@ -1,6 +1,6 @@
 {
   "name": "dice-graph",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "description": "Graph out of box",
   "module": "esm/index.js",
   "main": "cjs/index.js",
@@ -11,15 +11,13 @@
   "author": "Dominic Ming",
   "license": "MIT",
   "scripts": {
-    "start:site": "parcel site/index.html",
-    "build:site": "rm -rf ./docs & parcel build site/index.html -d docs --public-url ./",
-    "lib": "run-p lib:*",
+    "build": "run-p lib:*",
     "lib:umd": "webpack --config webpack.config.js --mode production",
     "lib:cjs": "tsc -p tsconfig.json --target ES5 --module commonjs --outDir cjs",
     "lib:esm": "tsc -p tsconfig.json --target ES5 --module ESNext --outDir esm"
   },
   "dependencies": {
-    "@antv/g6": "^3.8.0",
+    "@antv/g6": "^4.0.0",
     "color": "^3.1.3"
   },
   "devDependencies": {
