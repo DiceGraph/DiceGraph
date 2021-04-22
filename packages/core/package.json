@@ -1,0 +1,43 @@
+{
+  "name": "dice-graph",
+  "version": "0.3.7",
+  "description": "Graph out of box",
+  "module": "esm/index.js",
+  "main": "cjs/index.js",
+  "unpkg": "lib/index.min.js",
+  "typings": "types/index.d.ts",
+  "homepage": "https://dicegraph.github.io/DiceGraph",
+  "repository": "https://github.com/DiceGraph/DiceGraph.git",
+  "author": "Dominic Ming",
+  "license": "MIT",
+  "scripts": {
+    "build": "run-p lib:*",
+    "lib:umd": "webpack --config webpack.config.js --mode production",
+    "lib:cjs": "tsc -p tsconfig.json --target ES5 --module commonjs --outDir cjs",
+    "lib:esm": "tsc -p tsconfig.json --target ES5 --module ESNext --outDir esm"
+  },
+  "dependencies": {
+    "@antv/g6": "^4.0.0",
+    "color": "^3.1.3"
+  },
+  "devDependencies": {
+    "compression-webpack-plugin": "^6.1.1",
+    "@rollup/plugin-json": "^4.1.0",
+    "classnames": "^2.2.6",
+    "less": "^3.12.2",
+    "npm-run-all": "^4.1.5",
+    "parcel": "^1.12.4",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-helmet": "^6.1.0",
+    "react-logview": "^1.0.0",
+    "react-router-dom": "^5.2.0",
+    "terser-webpack-plugin": "^5.0.3",
+    "ts-loader": "^8.0.11",
+    "tslib": "^2.0.3",
+    "typescript": "^4.0.5",
+    "webpack": "^5.5.1",
+    "webpack-bundle-analyzer": "^4.1.0",
+    "webpack-cli": "^4.2.0"
+  }
+}
